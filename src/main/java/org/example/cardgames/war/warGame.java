@@ -5,24 +5,26 @@ import org.example.engine.PauseMenu;
 import org.example.mainmenu.GameRepository;
 import org.example.mainmenu.MenuPanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class warGame implements Game, KeyListener {
     private PauseMenu pauseMenu;
-    private warLogic logic;
 
     /**
      * @param frame the window that the game will live in
      */
     @Override
-    public void launch(JFrame frame) {
+    public void launch(JFrame frame) throws IOException {
         frame.setTitle("War");
         pauseMenu = new PauseMenu(frame, () -> returnToMenu(frame));
-        logic = new warLogic();
+        warLogic logic = new warLogic();
         frame.getContentPane().removeAll();
         frame.getContentPane().add(mainPanel());
         frame.addKeyListener(this);
@@ -53,7 +55,7 @@ public class warGame implements Game, KeyListener {
         return "War";
     }
 
-    public JPanel mainPanel() {
+    public JPanel mainPanel() throws IOException {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout(5, 5));
 
@@ -61,9 +63,12 @@ public class warGame implements Game, KeyListener {
         JPanel gamePanel = new JPanel();
         gamePanel.setLayout(new BorderLayout());
         gamePanel.setBackground(Color.WHITE);
-        JLabel cardNumber  =  new JLabel("Cards in deck: " + logic.deckSize);
 
-        gamePanel.add(cardNumber, BorderLayout.NORTH);
+        BufferedImage cardback = ImageIO.read(new File("src/main/resources/deckOfCards/back.jpg"));
+        JLabel pictureLabel = new JLabel(new ImageIcon(cardback));
+        pictureLabel.setBounds(0, 0, 100, 200);
+        gamePanel.add(pictureLabel, BorderLayout.NORTH);
+
         mainPanel.add(gamePanel, BorderLayout.CENTER);
 
         // Top bar with pause button pinned to the right
@@ -77,6 +82,7 @@ public class warGame implements Game, KeyListener {
 
         return mainPanel;
     }
+
 
     @Override
     public void keyTyped(KeyEvent e) {

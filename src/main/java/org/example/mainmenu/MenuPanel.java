@@ -8,6 +8,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
+import java.io.IOException;
 import java.util.List;
 
 public class MenuPanel extends JPanel {
@@ -147,7 +148,11 @@ public class MenuPanel extends JPanel {
             GameInformation selectedGame = gamesList.getSelectedValue();
             if (selectedGame != null) {
                 JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-                selectedGame.getFactory().get().launch(frame);
+                try {
+                    selectedGame.getFactory().get().launch(frame);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             }
         });
         return playButton;
