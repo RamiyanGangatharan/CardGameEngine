@@ -1,19 +1,18 @@
 package org.example.mainmenu;
 
+import org.example.engine.Game;
 import java.io.*;
+import java.util.function.Supplier;
 
 public class GameInformation {
     String title;
     String description;
+    Supplier<Game> factory;
 
-    /**
-     * This is the primary dataset to hold information about a game.
-     * @param title title of the game
-     * @param description what the game is
-     */
-    public GameInformation(String title, String description) {
+    public GameInformation(String title, String description, Supplier<Game> factory) {
         this.title = title;
         this.description = description;
+        this.factory = factory;
     }
 
     public String getTitle() { return title; }
@@ -22,18 +21,16 @@ public class GameInformation {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
 
-    // TODO: make a function that takes in a text file, reads its contents, then returns a string of its data.
-    // https://coderanch.com/t/633713/java/Read-text-file-display-Pane
+    public Supplier<Game> getFactory() { return factory; }
+
     public static String getContents(String fileLocation) throws IOException {
         StringBuilder contents = new StringBuilder();
-
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(fileLocation))) {
             String line;
             while ((line = bufferedReader.readLine()) != null) { contents.append(line).append("\n"); }
         }
-
         return contents.toString();
     }
 
-    @Override public String toString() {return title;}
+    @Override public String toString() { return title; }
 }

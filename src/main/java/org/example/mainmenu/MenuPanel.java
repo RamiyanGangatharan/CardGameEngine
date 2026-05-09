@@ -142,12 +142,9 @@ public class MenuPanel extends JPanel {
         playButton.setPreferredSize(new Dimension(120, 45));
         playButton.addActionListener(_ -> {
             GameInformation selectedGame = gamesList.getSelectedValue();
-
             if (selectedGame != null) {
-                JOptionPane.showMessageDialog(
-                    MenuPanel.this,
-                    selectedGame.getTitle() + " is a work in progress."
-                );
+                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+                selectedGame.getFactory().get().launch(frame);
             }
         });
         return playButton;

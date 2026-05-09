@@ -18,7 +18,8 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setTitle("CGE: Card Game Engine");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000, 650);
+        frame.setSize(900, 600);
+        frame.setExtendedState(JFrame.MAXIMIZED_BOTH);
         frame.setLocationRelativeTo(null);
         frame.setContentPane(new MenuPanel(games));
         frame.setVisible(true);
