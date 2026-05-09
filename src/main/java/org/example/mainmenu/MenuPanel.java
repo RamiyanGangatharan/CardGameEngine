@@ -16,6 +16,7 @@ public class MenuPanel extends JPanel {
 
     /**
      * This code is in charge of the GUI for the main menu.
+     *
      * @param games the list of games this will display
      */
     public MenuPanel(List<GameInformation> games) {
@@ -52,17 +53,19 @@ public class MenuPanel extends JPanel {
         // Left Side
         DefaultListModel<GameInformation> model = new DefaultListModel<>();
 
-        for (GameInformation game : games) { model.addElement(game); }
+        for (GameInformation game : games) {
+            model.addElement(game);
+        }
 
         JList<GameInformation> gamesList = new JList<>(model);
         gamesList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         gamesList.setFont(new Font("Monospaced", Font.PLAIN, 16));
         gamesList.setFixedCellHeight(45);
         gamesList.setBorder(
-            new CompoundBorder(
-                new EmptyBorder(5, 5, 5, 5),
-                new TitledBorder("SELECT A GAME")
-            )
+                new CompoundBorder(
+                        new EmptyBorder(5, 5, 5, 5),
+                        new TitledBorder("SELECT A GAME")
+                )
         );
 
         JScrollPane listScrollPane = new JScrollPane(gamesList);
@@ -86,10 +89,10 @@ public class MenuPanel extends JPanel {
         description.setFont(new Font("Monospaced", Font.PLAIN, 15));
 
         description.setBorder(
-            new CompoundBorder(
-                BorderFactory.createLineBorder(new Color(70, 70, 70), 1),
-                new EmptyBorder(15, 15, 15, 15)
-            )
+                new CompoundBorder(
+                        BorderFactory.createLineBorder(new Color(70, 70, 70), 1),
+                        new EmptyBorder(15, 15, 15, 15)
+                )
         );
 
         StyledDocument doc = description.getStyledDocument();

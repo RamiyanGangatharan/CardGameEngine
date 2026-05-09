@@ -8,10 +8,13 @@ import java.util.List;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    static void main(String[] args) throws IOException {
 
-        try { UIManager.setLookAndFeel(new FlatLightLaf()); }
-        catch (Exception ex) { System.err.println("Failed to initialize LaF"); }
+        try {
+            UIManager.setLookAndFeel(new FlatLightLaf());
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
 
         List<GameInformation> games = GameRepository.loadGames();
 

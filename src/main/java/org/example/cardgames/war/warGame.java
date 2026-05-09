@@ -17,7 +17,8 @@ public class warGame implements Game, KeyListener {
     /**
      * @param frame the window that the game will live in
      */
-    @Override public void launch(JFrame frame) {
+    @Override
+    public void launch(JFrame frame) {
         frame.setTitle("War");
         pauseMenu = new PauseMenu(frame, () -> returnToMenu(frame));
         frame.getContentPane().removeAll();
@@ -44,7 +45,10 @@ public class warGame implements Game, KeyListener {
     /**
      * @return the game's name
      */
-    @Override public String getName() {return "War";}
+    @Override
+    public String name() {
+        return "War";
+    }
 
     public JPanel mainPanel() {
         JPanel warPanel = new JPanel();
@@ -55,9 +59,18 @@ public class warGame implements Game, KeyListener {
         return warPanel;
     }
 
-    @Override public void keyTyped(KeyEvent e) {}
-    @Override public void keyPressed(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {pauseMenu.togglePause();}
+    @Override
+    public void keyTyped(KeyEvent e) {
     }
-    @Override public void keyReleased(KeyEvent e) {}
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            pauseMenu.togglePause();
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+    }
 }
