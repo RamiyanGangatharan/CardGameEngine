@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class warGame implements Game, KeyListener {
     private PauseMenu pauseMenu;
+    private warLogic logic;
 
     /**
      * @param frame the window that the game will live in
@@ -21,6 +22,7 @@ public class warGame implements Game, KeyListener {
     public void launch(JFrame frame) {
         frame.setTitle("War");
         pauseMenu = new PauseMenu(frame, () -> returnToMenu(frame));
+        logic = new warLogic();
         frame.getContentPane().removeAll();
         frame.getContentPane().add(mainPanel());
         frame.addKeyListener(this);
@@ -59,13 +61,18 @@ public class warGame implements Game, KeyListener {
         JPanel gamePanel = new JPanel();
         gamePanel.setLayout(new BorderLayout());
         gamePanel.setBackground(Color.WHITE);
+        JLabel cardNumber  =  new JLabel("Cards in deck: " + logic.deckSize);
+
+        gamePanel.add(cardNumber, BorderLayout.NORTH);
         mainPanel.add(gamePanel, BorderLayout.CENTER);
 
         // Top bar with pause button pinned to the right
         JPanel topBar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
         JButton pauseButton = new JButton("Pause");
+
         pauseButton.addActionListener(e -> pauseMenu.togglePause());
         topBar.add(pauseButton);
+
         mainPanel.add(topBar, BorderLayout.NORTH);
 
         return mainPanel;
