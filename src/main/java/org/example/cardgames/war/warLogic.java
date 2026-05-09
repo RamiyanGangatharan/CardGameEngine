@@ -135,5 +135,4 @@ public class warLogic {
             - WAR notifications
             - Victory screen
     */
-    Deck deck = new Deck();
 }

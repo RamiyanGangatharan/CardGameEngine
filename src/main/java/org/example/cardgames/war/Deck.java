@@ -18,10 +18,29 @@ public class Deck {
     private void initializeDeck() {
         for  (Card.Suit suit : Card.Suit.values()) {
             for (Card.Rank rank : Card.Rank.values()) {
-                cards.add(new Card(suit, rank));
+                cards.add(new Card(suit, rank, getRankValue(rank)));
             }
         }
     }
+
+    private int getRankValue(Card.Rank rank) {
+        return switch (rank) {
+            case TWO -> 2;
+            case THREE -> 3;
+            case FOUR -> 4;
+            case FIVE -> 5;
+            case SIX -> 6;
+            case SEVEN -> 7;
+            case EIGHT -> 8;
+            case NINE -> 9;
+            case TEN -> 10;
+            case JACK -> 11;
+            case QUEEN -> 12;
+            case KING -> 13;
+            case ACE -> 14;
+        };
+    }
+
 
     // https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
     // https://www.geeksforgeeks.org/dsa/shuffle-a-given-array-using-fisher-yates-shuffle-algorithm/
