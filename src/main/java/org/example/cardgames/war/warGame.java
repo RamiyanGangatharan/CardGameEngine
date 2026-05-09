@@ -26,6 +26,7 @@ public class warGame implements Game, KeyListener {
         frame.addKeyListener(this);
         frame.setFocusable(true);
         frame.requestFocusInWindow();
+        frame.setBackground(Color.GRAY);
         frame.revalidate();
         frame.repaint();
     }
@@ -51,12 +52,23 @@ public class warGame implements Game, KeyListener {
     }
 
     public JPanel mainPanel() {
-        JPanel warPanel = new JPanel();
-        warPanel.setLayout(new BorderLayout(5, 5));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setLayout(new BorderLayout(5, 5));
+
+        // Game panel takes up the majority
+        JPanel gamePanel = new JPanel();
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.setBackground(Color.WHITE);
+        mainPanel.add(gamePanel, BorderLayout.CENTER);
+
+        // Top bar with pause button pinned to the right
+        JPanel topBar = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 5));
         JButton pauseButton = new JButton("Pause");
         pauseButton.addActionListener(e -> pauseMenu.togglePause());
-        warPanel.add(pauseButton, BorderLayout.NORTH);
-        return warPanel;
+        topBar.add(pauseButton);
+        mainPanel.add(topBar, BorderLayout.NORTH);
+
+        return mainPanel;
     }
 
     @Override
